@@ -10,6 +10,8 @@ class Solution:
 
                 left += 1
 
-                nums[left] = nums[right]
+                nums[left] ,nums[right] = nums[right],nums[left]
+        
+
 
         return left + 1
