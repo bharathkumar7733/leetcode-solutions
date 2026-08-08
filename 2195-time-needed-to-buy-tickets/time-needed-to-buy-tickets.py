@@ -1,18 +1,20 @@
 from collections import deque
-from typing import List  
 
 class Solution:
     def timeRequiredToBuy(self, tickets: List[int], k: int) -> int:
-        queue = deque([(t, i) for i, t in enumerate(tickets)])  
-        operations = 0
 
-        while queue:
-            ele, idx = queue.popleft()   
-            ele -= 1
-            operations += 1
+        queue = deque(range(len(tickets)))
 
-            if ele > 0:
-                queue.append((ele, idx)) 
+        time = 0
 
-            if idx == k and ele == 0:   
-                return operations
+        while tickets[k] > 0:
+
+            person = queue.popleft()
+
+            tickets[person] -= 1
+            time += 1
+
+            if tickets[person] > 0:
+                queue.append(person)
+
+        return time
